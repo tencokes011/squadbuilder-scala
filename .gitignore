@@ -1,0 +1,7 @@
+target/
+.idea/
+release/
+atlassian-ide-plugin.xml
+.DS_Store
+project/project/
+project/target/
