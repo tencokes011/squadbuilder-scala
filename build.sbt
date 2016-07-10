@@ -18,7 +18,7 @@ libraryDependencies ++= Seq(
   // -- Time --
   , "joda-time" % "joda-time" % "2.9.1"
   // -- MongoDB --
-  , "org.mongodb.scala" %% "mongo-scala-driver" % "1.1.1"
+  , "org.reactivemongo" %% "reactivemongo" % "0.11.14"
   // -- Salt/Hash --
   , "com.roundeights" %% "hasher" % "1.2.0"
   // -- JWT --
