@@ -15,10 +15,13 @@ libraryDependencies ++= Seq(
   , "com.typesafe.akka" %% "akka-stream" % "2.4.7"
   , "com.typesafe.akka" %% "akka-http-core" % "2.4.7"
   , "com.typesafe.akka" %% "akka-http-spray-json-experimental" % "2.4.7"
+  , "com.typesafe.akka" %% "akka-slf4j" % "2.4.7"
   // -- Time --
   , "joda-time" % "joda-time" % "2.9.1"
   // -- MongoDB --
-  , "org.reactivemongo" %% "reactivemongo" % "0.11.14"
+  , "com.github.jeroenr" %% "tepkin" % "0.7"
+  // -- JSON --
+  , "org.json4s" % "json4s-jackson_2.11" % "3.4.0"
   // -- Salt/Hash --
   , "com.roundeights" %% "hasher" % "1.2.0"
   // -- JWT --

@@ -1,6 +1,8 @@
 package com.squadbuilder.app.core
 
 import akka.actor.{ActorSystem, Props}
+import akka.event.Logging
+import akka.http.javadsl.server.AuthorizationFailedRejection
 import akka.pattern.ask
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
@@ -23,7 +25,7 @@ import scala.language.postfixOps
   * Created by Timothy Owens on 7/5/16.
   **/
 
-object Main extends JSONProtocol {
+object Main extends App with JSONProtocol {
 
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 
@@ -31,14 +33,25 @@ object Main extends JSONProtocol {
   implicit val materializer = ActorMaterializer()
   implicit val timeout = Timeout(2 minutes)
 
+  val log = Logging(system, getClass)
+
   lazy val userActor = system.actorOf(Props[UserActor])
 
   def main = {
     path("signin") {
       entity(as[Login]) { login =>
+        log.debug(s"Testing Log")
         onComplete(userActor ? login) {
-          case Success(s) => complete(s.toString)
-          case Failure(ex) => complete(StatusCodes.BadRequest)
+          case Success(s) =>
+            log.debug(s"Successfully returned JWT: $s")
+            s match {
+              case string: String => complete(string)
+              case _ => reject(AuthorizationFailedRejection.get)
+            }
+            complete(s.asInstanceOf[String])
+          case Failure(ex) =>
+            log.error(s"Failed!!!!")
+            failWith(ex)
         }
       }
     }
