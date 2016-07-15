@@ -9,7 +9,6 @@ import scala.language.postfixOps
 
 /**
   * Created by Timothy Owens on 7/5/16.
-  * Copyright © 2016 Data Meaning Services Group, Inc. All rights reserved.
   */
 object UserDAL extends BaseEntityCollection[UserEntity] {
 
